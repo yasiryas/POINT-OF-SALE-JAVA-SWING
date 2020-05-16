@@ -35,7 +35,6 @@ public class login extends javax.swing.JFrame {
             statement.setString(2, pass.getText());
             result = statement.executeQuery();
             
-            
             if (result.next()){
                 id = result.getString("id");
                 username = result.getString("username");

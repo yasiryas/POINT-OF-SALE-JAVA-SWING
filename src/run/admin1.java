@@ -7,19 +7,17 @@ package run;
 
 import java.awt.HeadlessException;
 import java.sql.*;
-//import java.sql.Date;
 import java.util.*;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.util.ObjectUtils;
 import net.sf.jasperreports.view.*;
 
 /**
@@ -29,9 +27,10 @@ import net.sf.jasperreports.view.*;
 public final class admin1 extends javax.swing.JFrame {
 String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
         PASSWORD = session.getPassword(), EMAIL = session.getEmail(), USERNAME = session.getUsername();
-    java.sql.Connection konek;
-    PreparedStatement statement;
-    ResultSet result;
+    
+    Connection konek = null;
+    PreparedStatement statement = null;
+    ResultSet result = null;
     /**
      * Creates new form admin1
      */
@@ -47,12 +46,9 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
         emailp.setText(EMAIL);
         passp.setText(PASSWORD);
         levelp.setText(LEVEL);
-        
-        
+               
     }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,6 +192,10 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
+        tanggaljual2 = new com.toedter.calendar.JDateChooser();
+        tanggaljual1 = new com.toedter.calendar.JDateChooser();
+        tanggalbeli2 = new com.toedter.calendar.JDateChooser();
+        tanggalbeli1 = new com.toedter.calendar.JDateChooser();
         profil = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -407,7 +407,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         admin.addTab("HOME", home);
@@ -522,7 +522,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
             .addGroup(barangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(barangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                     .addGroup(barangLayout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addGap(23, 23, 23)
@@ -1163,7 +1163,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                 .addGroup(pembelianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pembelianLayout.createSequentialGroup()
                         .addComponent(jLabel40)
-                        .addGap(16, 525, Short.MAX_VALUE))
+                        .addGap(16, 514, Short.MAX_VALUE))
                     .addGroup(pembelianLayout.createSequentialGroup()
                         .addComponent(jLabel48)
                         .addGroup(pembelianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1206,7 +1206,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                                 .addGap(11, 11, 11))
                             .addGroup(pembelianLayout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                                 .addContainerGap())))))
         );
 
@@ -1307,9 +1307,13 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                         .addGroup(laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(laporanLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
-                                .addGap(129, 129, 129)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tanggaljual1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
                                 .addComponent(jLabel57)
-                                .addGap(136, 136, 136)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tanggaljual2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton26)
@@ -1319,10 +1323,14 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                         .addGroup(laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(laporanLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jLabel58)
-                                .addGap(150, 150, 150)
+                                .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tanggalbeli1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel59)
-                                .addGap(137, 137, 137)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tanggalbeli2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jToggleButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton27)
@@ -1356,10 +1364,14 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                     .addComponent(jButton24)
                     .addComponent(jButton25)
                     .addComponent(jButton26)
-                    .addComponent(jButton27))
+                    .addComponent(jButton27)
+                    .addComponent(tanggaljual2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggaljual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggalbeli2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggalbeli1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(laporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                     .addComponent(jScrollPane7))
                 .addContainerGap())
         );
@@ -1492,7 +1504,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                 .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         admin.addTab("PROFIL", profil);
@@ -1516,7 +1528,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -1537,7 +1549,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nama1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1546,7 +1558,7 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                 .addComponent(nama1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1558,8 +1570,8 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(579, 579, 579))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(466, 466, 466))
                     .addComponent(admin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1567,8 +1579,8 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(admin)
                 .addGap(23, 23, 23))
@@ -1961,7 +1973,6 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
         statement = konek.prepareStatement(sql);
         result = statement.executeQuery();
         tabel_cari_beli.setModel(DbUtils.resultSetToTableModel((ResultSet) result));
-        
         }catch(SQLException e){
             JOptionPane.showMessageDialog(rootPane, e);
         }
@@ -2196,11 +2207,11 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
     }
     
     private void hitungProvit(){
+        String sql = "select sum(profit) as profit from laporan_penjualan";
         try{
-        String sql = "SELECT SUM(profit) AS profit FROM laporan_penjualan";
         statement = konek.prepareStatement(sql);
         result = statement.executeQuery();
-        while(result.next()){
+        if(result.next()){
             tampil_profit.setText(result.getString("profit"));
         }
         }catch(SQLException e){
@@ -2343,7 +2354,6 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
         konek = koneksi.koneksi();
         loadPengguna();
         loadBarang();
@@ -2842,6 +2852,10 @@ String ID = session.getUser(), LEVEL = session.getLevel(), id = session.getId(),
     private javax.swing.JLabel tampil_pengeluaran;
     private javax.swing.JLabel tampil_penjualan;
     private javax.swing.JLabel tampil_profit;
+    private com.toedter.calendar.JDateChooser tanggalbeli1;
+    private com.toedter.calendar.JDateChooser tanggalbeli2;
+    private com.toedter.calendar.JDateChooser tanggaljual1;
+    private com.toedter.calendar.JDateChooser tanggaljual2;
     private javax.swing.JLabel total_jual;
     private javax.swing.JLabel totalbarang;
     private javax.swing.JTextField tunai_jual;
